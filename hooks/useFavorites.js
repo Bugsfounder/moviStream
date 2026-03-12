@@ -1,21 +1,26 @@
 import { useState, useEffect } from 'react';
 
 const useFavorites = () => {
-    const [favorites, setFavorites] = useState(() => {
+    const [favorites, setFavorites] = useState([]);
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
         const saved = localStorage.getItem('favorites');
         if (saved) {
             try {
-                return JSON.parse(saved);
+                setFavorites(JSON.parse(saved));
             } catch (e) {
-                return [];
+                // Ignore error
             }
         }
-        return [];
-    });
+    }, []);
 
     useEffect(() => {
-        localStorage.setItem('favorites', JSON.stringify(favorites));
-    }, [favorites]);
+        if (isMounted) {
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+    }, [favorites, isMounted]);
 
     const toggleFavorite = (movie) => {
         setFavorites(prev => {
@@ -30,7 +35,8 @@ const useFavorites = () => {
 
     const isFavorite = (id) => favorites.some(f => f.id === id);
 
-    return { favorites, toggleFavorite, isFavorite };
+    // Provide a safe way for components to wait for mount if needed
+    return { favorites, toggleFavorite, isFavorite, isMounted };
 };
 
 export default useFavorites;

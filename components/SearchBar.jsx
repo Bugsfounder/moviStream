@@ -1,26 +1,28 @@
+"use client";
+
 import { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Search } from 'lucide-react';
 import useDebounce from '../hooks/useDebounce';
 
 const SearchBar = () => {
-    const [searchParams] = useSearchParams();
+    const searchParams = useSearchParams();
     const initialQuery = searchParams.get('q') || '';
 
     const [inputValue, setInputValue] = useState(initialQuery);
     const debouncedValue = useDebounce(inputValue, 500);
-    const navigate = useNavigate();
+    const router = useRouter();
 
     useEffect(() => {
         // Prevent navigating on initial mount if the search bar is just populated from URL
         if (debouncedValue !== initialQuery && (debouncedValue || initialQuery)) {
             if (debouncedValue.trim()) {
-                navigate(`/?q=${encodeURIComponent(debouncedValue)}`);
+                router.push(`/?q=${encodeURIComponent(debouncedValue)}`);
             } else {
-                navigate('/');
+                router.push('/');
             }
         }
-    }, [debouncedValue, navigate, initialQuery]);
+    }, [debouncedValue, router, initialQuery]);
 
     return (
         <div className="search-container">

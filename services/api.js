@@ -1,4 +1,4 @@
-const TMDB_KEY = import.meta.env.VITE_TMDB_KEY;
+const TMDB_KEY = process.env.NEXT_PUBLIC_TMDB_KEY || process.env.TMDB_KEY;
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
@@ -29,3 +29,8 @@ export const getImageUrl = (path) => {
     if (!path) return 'https://via.placeholder.com/500x750?text=No+Image';
     return `${IMAGE_BASE_URL}${path}`;
 };
+
+export const getMovieDetails = async (id) => {
+    return fetchFromAPI(`/movie/${id}`);
+};
+

@@ -1,4 +1,7 @@
+"use client";
+
 import { Heart } from 'lucide-react';
+import Image from 'next/image';
 import { getImageUrl } from '../services/api';
 
 const MovieCard = ({ movie, isFavorite, onToggleFavorite }) => {
@@ -9,11 +12,12 @@ const MovieCard = ({ movie, isFavorite, onToggleFavorite }) => {
     return (
         <div className="movie-card">
             <div className="movie-poster-container">
-                <img
+                <Image
                     src={getImageUrl(poster_path)}
                     alt={`${title} poster`}
                     className="movie-poster"
-                    loading="lazy"
+                    width={500}
+                    height={750}
                 />
                 <button
                     className={`favorite-btn ${isFavorite ? 'active' : ''}`}
