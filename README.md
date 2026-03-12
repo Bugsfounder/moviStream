@@ -1,6 +1,6 @@
 # Cine-Stream (Movie Explorer)
 
-[live Link](https://movi-stream.vercel.app/)
+[live Link](https://movi-stream-56rj.vercel.app/)
 
 Welcome to Cine-Stream, a modern and elegant movie discovery application built with React, Vite, and the TMDB API. It features a simple, clean, humanoid light-themed design.
 
