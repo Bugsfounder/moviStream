@@ -47,6 +47,11 @@ Welcome to Cine-Stream, a modern and elegant movie discovery application built w
    npm run dev
    ```
 
+4. Start storybook
+```bash
+npm run storybook
+```
+
 ### Scripts
 
 - `npm run dev`: Starts the local development server.

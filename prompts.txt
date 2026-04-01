@@ -1,0 +1,6 @@
+what is storybook 
+why use storybook
+how to setup storybook 
+where to use storybook and where not to use 
+in which cases storybook work like a lagend 
+how to change default ip of storybook server 
